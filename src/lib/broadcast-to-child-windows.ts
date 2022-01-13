@@ -4,6 +4,7 @@ import { childWindows } from "./constants";
 export function broadcastToChildWindows(
   payload: string,
   origin: string,
+  broadcastMode: string,
   source: Window
 ): void {
   for (let i = childWindows.length - 1; i >= 0; i--) {
@@ -13,7 +14,7 @@ export function broadcastToChildWindows(
       childWindows.splice(i, 1);
     } else if (source !== childWindow) {
       if (childWindow.top) {
-        broadcast(childWindow.top, payload, origin);
+        broadcast(childWindow.top, payload, origin, broadcastMode);
       }
     }
   }

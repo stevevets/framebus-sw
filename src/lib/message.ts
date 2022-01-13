@@ -17,8 +17,9 @@ export function onmessage(e: MessageEvent): void {
 
   const data = payload.eventData as FramebusSubscriberArg;
   const reply = payload.reply as FramebusSubscribeHandler;
+  const broadcastMode = 'all';
 
   dispatch("*", payload.event, data, reply, e);
   dispatch(e.origin, payload.event, data, reply, e);
-  broadcastToChildWindows(e.data, payload.origin, e.source as Window);
+  broadcastToChildWindows(e.data, payload.origin, broadcastMode, e.source as Window);
 }

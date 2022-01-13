@@ -20,6 +20,7 @@ type VerifyDomainMethod = (domain: string) => boolean;
 type FramebusOptions = {
   channel?: string;
   origin?: string;
+  broadcastMode? : 'all'|'self'|'top'|'parent'|'children';
   verifyDomain?: VerifyDomainMethod;
 };
 
@@ -28,6 +29,7 @@ const DefaultPromise = (typeof window !== "undefined" &&
 
 export class Framebus {
   origin: string;
+  broadcastMode: string;
   channel: string;
 
   private verifyDomain?: VerifyDomainMethod;
@@ -36,9 +38,9 @@ export class Framebus {
 
   constructor(options: FramebusOptions = {}) {
     this.origin = options.origin || "*";
+    this.broadcastMode = options.broadcastMode || 'all';
     this.channel = options.channel || "";
     this.verifyDomain = options.verifyDomain;
-
     this.isDestroyed = false;
     this.listeners = [];
   }
@@ -83,6 +85,7 @@ export class Framebus {
     }
 
     const origin = this.origin;
+    const broadcastMode = this.broadcastMode;
     eventName = this.namespaceEvent(eventName);
 
     if (isntString(eventName)) {
@@ -103,7 +106,7 @@ export class Framebus {
       return false;
     }
 
-    broadcast(window.top || window.self, payload, origin);
+    broadcast(window.top || window.self, payload, origin, broadcastMode);
 
     return true;
   }
