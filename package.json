@@ -6,7 +6,7 @@
     "url": "git@github.com:stevevets/framebus-sw.git"
   },
   "homepage": "https://github.com/stevevets/framebus-sw",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "files": [
     "dist/"

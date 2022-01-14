@@ -136,7 +136,8 @@ describe("Framebus", () => {
       expect(broadcast).toBeCalledWith(
         window.top,
         expect.stringContaining('"foo":"bar"'),
-        "*"
+        "*",
+        "all"
       );
     });
 
@@ -161,7 +162,8 @@ describe("Framebus", () => {
       expect(broadcast).toBeCalledWith(
         window.top,
         expect.stringContaining('"foo":"bar"'),
-        "foo"
+        "foo",
+        "all"
       );
     });
 
@@ -179,7 +181,8 @@ describe("Framebus", () => {
       expect(broadcast).toBeCalledWith(
         window.top,
         expect.stringContaining('"unique-channel:event-name"'),
-        "*"
+        "*",
+        "all"
       );
     });
 
@@ -192,7 +195,8 @@ describe("Framebus", () => {
       expect(broadcast).toBeCalledWith(
         window.top,
         expect.stringContaining('"event-name"'),
-        "*"
+        "*",
+        "all"
       );
     });
 
@@ -203,7 +207,8 @@ describe("Framebus", () => {
       expect(broadcast).toBeCalledWith(
         window.top,
         expect.stringContaining('"foo":"bar"'),
-        "*"
+        "*",
+        "all"
       );
     });
 
@@ -214,7 +219,8 @@ describe("Framebus", () => {
       expect(broadcast).toBeCalledWith(
         window.top,
         expect.stringContaining('"event-name"'),
-        "*"
+        "*",
+        "all"
       );
     });
   });

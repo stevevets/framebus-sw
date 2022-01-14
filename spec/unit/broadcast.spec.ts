@@ -17,14 +17,14 @@ describe("broadcast", () => {
     });
 
     expect(() => {
-      broadcast(frame, "payload", "*");
+      broadcast(frame, "payload", "*", "all");
     }).not.toThrowError();
   });
 
   it("should postMessage to current frame", () => {
     const frame = mkFrame();
 
-    broadcast(frame, "payload", "*");
+    broadcast(frame, "payload", "*", "all");
 
     expect(frame.postMessage).toBeCalled();
   });
@@ -33,7 +33,7 @@ describe("broadcast", () => {
     const frame = mkFrame();
     frame.frames[0] = mkFrame();
 
-    broadcast(frame, "payload", "*");
+    broadcast(frame, "payload", "*", "all");
 
     expect(frame.frames[0].postMessage).toBeCalled();
   });
@@ -48,7 +48,7 @@ describe("broadcast", () => {
       // @ts-ignore
       frame.opener.top = frame.opener;
 
-      broadcast(frame, "payload", "*");
+      broadcast(frame, "payload", "*", "all");
 
       expect(frame.opener.top.postMessage).toBeCalled();
     });
@@ -69,7 +69,7 @@ describe("broadcast", () => {
       frame.opener.top = frame.opener;
       frame.top = frame;
 
-      broadcast(frame, "payload", "*");
+      broadcast(frame, "payload", "*", "all");
 
       expect(spy).not.toBeCalled();
     });
@@ -81,7 +81,7 @@ describe("broadcast", () => {
       frame.opener = frame;
       frame.top = frame;
 
-      broadcast(frame, "payload", "*");
+      broadcast(frame, "payload", "*", "all");
 
       // don't infinitely recurse
       done();
@@ -98,7 +98,7 @@ describe("broadcast", () => {
       frame.frames[0] = child;
       frame.top = frame;
 
-      broadcast(frame, "payload", "*");
+      broadcast(frame, "payload", "*", "all");
 
       // don't infinitely recurse
       done();
@@ -116,7 +116,7 @@ describe("broadcast", () => {
       frame.opener.top = frame.opener;
       frame.top = frame;
 
-      broadcast(frame, "payload", "*");
+      broadcast(frame, "payload", "*", "all");
 
       expect(frame.opener.top.frames[0].postMessage).toBeCalled();
     });
@@ -133,7 +133,7 @@ describe("broadcast", () => {
       });
 
       expect(() => {
-        broadcast(frame, "payload", "*");
+        broadcast(frame, "payload", "*", "all");
       }).not.toThrowError("Access denied");
     });
   });

@@ -20,7 +20,7 @@ type VerifyDomainMethod = (domain: string) => boolean;
 type FramebusOptions = {
   channel?: string;
   origin?: string;
-  broadcastMode? : 'all'|'self'|'top'|'parent'|'children';
+  broadcastMode?: "all" | "self" | "top" | "parent" | "children";
   verifyDomain?: VerifyDomainMethod;
 };
 
@@ -38,7 +38,7 @@ export class Framebus {
 
   constructor(options: FramebusOptions = {}) {
     this.origin = options.origin || "*";
-    this.broadcastMode = options.broadcastMode || 'all';
+    this.broadcastMode = options.broadcastMode || "all";
     this.channel = options.channel || "";
     this.verifyDomain = options.verifyDomain;
     this.isDestroyed = false;
