@@ -4,7 +4,7 @@ export function broadcast(
   frame: Window,
   payload: string,
   origin: string,
-  broadcastMode: string
+  broadcastMode = "all"
 ): void {
   try {
     if (broadcastMode === "self") {
